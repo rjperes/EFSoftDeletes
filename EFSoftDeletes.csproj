@@ -7,8 +7,9 @@
     <Title>Entity Framework Core Soft Deletes</Title>
     <Authors>Ricardo Peres</Authors>
     <Copyright>Ricardo Peres</Copyright>
-    <PackageProjectUrl>https//github.com/rjperes</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/rjperes/EFSoftDeletes</PackageProjectUrl>
     <Description>A collection of APIs for easing soft-deletes with EF Core</Description>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
