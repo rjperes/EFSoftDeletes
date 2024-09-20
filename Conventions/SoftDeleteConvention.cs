@@ -6,6 +6,10 @@ using System.Reflection;
 
 namespace EFSoftDeletes.Conventions
 {
+    internal class SoftDeleteConvention : SoftDeleteConvention<bool>
+    {
+    }
+
     internal class SoftDeleteConvention<T> : IModelFinalizingConvention
     {
         private const string _isDeletedProperty = "IsDeleted";
