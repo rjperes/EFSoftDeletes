@@ -7,7 +7,7 @@ namespace EFSoftDeletes.Extensions
     {
         public static ModelConfigurationBuilder AddSoftDeleteConvention(this ModelConfigurationBuilder configurationBuilder)
         {
-            configurationBuilder.Conventions.Add(_ => new SoftDeleteConvention<bool>());
+            configurationBuilder.Conventions.Add(_ => new SoftDeleteConvention<bool> { DeletedValue = true });
             return configurationBuilder;
         }
     }
