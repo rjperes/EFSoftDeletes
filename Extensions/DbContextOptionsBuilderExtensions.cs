@@ -13,6 +13,12 @@ namespace EFSoftDeletes.Extensions
 
     public static class DbContextOptionsBuilderExtensions
     {
+        public static T AddSoftDeleteQueryExpressionInterceptor<T>(this T optionsBuilder) where T : DbContextOptionsBuilder
+        {
+            optionsBuilder.AddInterceptors(new SoftDeleteQueryExpressionInterceptor());
+            return optionsBuilder;
+        }
+            
         public static T Add<T>(this T optionsBuilder, SoftDeleteInterceptorOption option = SoftDeleteInterceptorOption.All) where T : DbContextOptionsBuilder
         {
             var interceptors = new List<IInterceptor>();
