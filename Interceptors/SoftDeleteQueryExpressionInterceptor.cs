@@ -13,7 +13,6 @@ class SoftDeleteQueryExpressionInterceptor : IQueryExpressionInterceptor
 
     class SoftDeletableQueryExpressionVisitor : ExpressionVisitor
     {
-        private const string _isDeletedProperty = "IsDeleted";
         private static readonly MethodInfo _executeDeleteMethod = typeof(RelationalQueryableExtensions).GetMethod(nameof(RelationalQueryableExtensions.ExecuteDelete), BindingFlags.Public | BindingFlags.Static)!;
         private static readonly MethodInfo _executeUpdateMethod = typeof(RelationalQueryableExtensions).GetMethod(nameof(RelationalQueryableExtensions.ExecuteUpdate), BindingFlags.Public | BindingFlags.Static)!;
         private static readonly MethodInfo _propertyMethod = typeof(EF).GetMethod(nameof(EF.Property), BindingFlags.Static | BindingFlags.Public)!;
@@ -38,7 +37,7 @@ class SoftDeleteQueryExpressionInterceptor : IQueryExpressionInterceptor
  
                     var setterParameter = Expression.Parameter(typeof(SetPropertyCalls<>).MakeGenericType(entityType), "setters");
                     var parameter = Expression.Parameter(entityType, "p");
-                    var propertyCall = Expression.Call(null, _propertyMethod.MakeGenericMethod(typeof(bool)), parameter, Expression.Constant(_isDeletedProperty));
+                    var propertyCall = Expression.Call(null, _propertyMethod.MakeGenericMethod(typeof(bool)), parameter, Expression.Constant(Constants.IsDeletedProperty));
                     var propertyCallLambda = Expression.Lambda(propertyCall, parameter);
                     var setPropertyCall = Expression.Call(setterParameter, setPropertyMethod, propertyCallLambda, Expression.Constant(true));
                     var lambda = Expression.Lambda(setPropertyCall, setterParameter);
